@@ -22,17 +22,17 @@ import ListSensor from './ListSensor';
 const DeviceReady = () => {
     // Dữ liệu fake cho danh sách thiết bị
     const usersData = [
-        { 'Mã thiết bị': '001', 'Tên thiết bị': 'ESP', 'Mô tả': 'Guest', 'status': 'true', 'deviceCode': 'Pi' },
-        { 'Mã thiết bị': '002', 'Tên thiết bị': 'Pi', 'Mô tả': 'Member', 'status': 'true', 'deviceCode': 'Pi' },
-        { 'Mã thiết bị': '133', 'Tên thiết bị': 'Đèn phòng', 'Mô tả': 'Staff', 'status': 'false', 'deviceCode': 'Pi' },
+        { 'Mã thiết bị': '001', 'Tên thiết bị': 'ESP', 'Mô tả': 'Guest', 'deviceCode': 'Pi' },
+        { 'Mã thiết bị': '002', 'Tên thiết bị': 'Pi', 'Mô tả': 'Member', 'deviceCode': 'Pi' },
+        { 'Mã thiết bị': '133', 'Tên thiết bị': 'Đèn phòng', 'Mô tả': 'Staff', 'deviceCode': 'Pi' },
         { 'Mã thiết bị': '015', 'Tên thiết bị': 'Tivi', 'Mô tả': 'Admin', 'status': 'true', 'deviceCode': 'Pi' },
-        { 'Mã thiết bị': '110', 'Tên thiết bị': 'Tủ lạnh', 'Mô tả': 'Member', 'status': 'false', 'deviceCode': 'Pi' },
-        { 'Mã thiết bị': '005', 'Tên thiết bị': 'Điều hòa', 'Mô tả': 'Staff', 'status': 'true', 'deviceCode': 'Pi' },
-        { 'Mã thiết bị': '007', 'Tên thiết bị': 'Máy sưởi', 'Mô tả': 'Member', 'status': 'false', 'deviceCode': 'Pi' },
-        { 'Mã thiết bị': '014', 'Tên thiết bị': 'Đèn ngủ', 'Mô tả': 'Staff', 'status': 'false', 'deviceCode': 'Pi' },
-        { 'Mã thiết bị': '003', 'Tên thiết bị': 'Đèn bếp', 'Mô tả': 'Admin', 'status': 'true', 'deviceCode': 'Pi' },
-        { 'Mã thiết bị': '112', 'Tên thiết bị': 'Lò vi sóng', 'Mô tả': 'Member', 'status': 'true', 'deviceCode': 'Pi' },
-        { 'Mã thiết bị': '123', 'Tên thiết bị': 'Bình nóng lạnh', 'Mô tả': 'Staff', 'status': 'true', 'deviceCode': 'Pi' },
+        { 'Mã thiết bị': '110', 'Tên thiết bị': 'Tủ lạnh', 'Mô tả': 'Member', 'deviceCode': 'Pi' },
+        { 'Mã thiết bị': '005', 'Tên thiết bị': 'Điều hòa', 'Mô tả': 'Staff', 'deviceCode': 'Pi' },
+        { 'Mã thiết bị': '007', 'Tên thiết bị': 'Máy sưởi', 'Mô tả': 'Member', 'deviceCode': 'Pi' },
+        { 'Mã thiết bị': '014', 'Tên thiết bị': 'Đèn ngủ', 'Mô tả': 'Staff', 'deviceCode': 'Pi' },
+        { 'Mã thiết bị': '003', 'Tên thiết bị': 'Đèn bếp', 'Mô tả': 'Admin', 'deviceCode': 'Pi' },
+        { 'Mã thiết bị': '112', 'Tên thiết bị': 'Lò vi sóng', 'Mô tả': 'Member', 'deviceCode': 'Pi' },
+        { 'Mã thiết bị': '123', 'Tên thiết bị': 'Bình nóng lạnh', 'Mô tả': 'Staff', 'deviceCode': 'Pi' },
     ]
 
 
@@ -55,7 +55,6 @@ const DeviceReady = () => {
         'Tên thiết bị',
         { key: 'deviceCode', label:'Loại', _style: { width: '10%' } },
         { key: 'Mô tả', _style: { width: '30%' } },
-        { key: 'status', _style: { width: '10%' } },
         {
             key: 'actionDevice',
             label: '',
@@ -71,14 +70,7 @@ const DeviceReady = () => {
             filter: false
         }
     ]
-    // Set checked cho bảng thiết bị, sensor
-    const getBadge = status => {
-        switch (status) {
-            case 'true': return true
-            case 'false': return false
-            default: return false
-        }
-    }
+
     // Mô tả các trường cho bảng sensor
     const fieldSensor = [
         { key: 'Mã sensor', _style: { width: '10%' } },
@@ -90,7 +82,6 @@ const DeviceReady = () => {
 
     const [danger, setConfirm] = useState(false)
     const [update, setUpdate] = useState(false)
-    const [add, setAdd] = useState(false)
     const [deviceAdd, setAddDevice] = useState(false)
     return (
         <div className="card">
@@ -111,12 +102,6 @@ const DeviceReady = () => {
                     sorter
                     pagination
                     scopedSlots={{
-                        'status':
-                            (item) => (
-                                <td>
-                                    <CSwitch className={'mx-1'} variant={'3d'} color={'success'} defaultChecked={getBadge(item.status)} />
-                                </td>
-                            ),
                         'actionDevice':
                             (item, index) => {
                                 return (
@@ -151,46 +136,13 @@ const DeviceReady = () => {
                                     <CCollapse show={details.includes(index)}>
                                         <CCardBody>
                                             <ListSensor />
-                                            <hr />
-                                            <CButton size="sm" color="success" className="ml-1" onClick={() => setAdd(!add)}>
-                                                Thêm sensor
-                                            </CButton>
                                         </CCardBody>
                                     </CCollapse>
                                 )
                             }
                     }}
                 />
-                {/* Modal thêm sensor mới */}
-                <CModal
-                    show={add}
-                    onClose={() => setAdd(!add)}
-                    color="success"
-                    size="lg"
-                >
-                    <CModalHeader closeButton>
-                        <CModalTitle>Thêm sensor</CModalTitle>
-                    </CModalHeader>
-                    <CModalBody>
-                        <CFormGroup row className="mt-4">
-                            <CCol md="3">
-                                <CLabel htmlFor="select">Chọn tên sensor thêm mới</CLabel>
-                            </CCol>
-                            <CCol xs="12" md="9">
-                                <CSelect custom name="select" id="select">
-                                    <option value="0">Chọn tên sensor</option>
-                                    <option value="1">Option #1</option>
-                                    <option value="2">Option #2</option>
-                                    <option value="3">Option #3</option>
-                                </CSelect>
-                            </CCol>
-                        </CFormGroup>
-                    </CModalBody>
-                    <CModalFooter>
-                        <CButton color="success" onClick={() => setAdd(!add)}>Thêm mới</CButton>{' '}
-                        <CButton color="secondary" onClick={() => setAdd(!add)}>Hủy</CButton>
-                    </CModalFooter>
-                </CModal>
+                
                 {/* Modal cập nhật thiết bị */}
                 <CModal
                     show={update}
@@ -275,10 +227,10 @@ const DeviceReady = () => {
                         </CCol>
                     </CFormGroup>
                     <CFormGroup row className="mt-3">
-                        <CCol md="3">
+                        <CCol md="2">
                             <CLabel htmlFor="select">Loại thiết bị</CLabel>
                         </CCol>
-                        <CCol xs="12" md="9">
+                        <CCol xs="12" md="10">
                             <CSelect custom name="select" id="select">
                                 <option value="0">Chọn loại</option>
                                 <option value="1">Option #1</option>

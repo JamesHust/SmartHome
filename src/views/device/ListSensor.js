@@ -54,6 +54,7 @@ const ListSensor = () => {
 
     const [deleteS, setDltS] = useState(false)
     const [updateS, setUpdateS] = useState(false)
+    const [add, setAdd] = useState(false)
     return (
         <div>
             <h5>
@@ -74,7 +75,7 @@ const ListSensor = () => {
                     'status':
                         (item) => (
                             <td>
-                                <CSwitch className={'mx-1'} variant={'3d'} color={'success'} defaultChecked={getBadge(item.status)} size="sm"/>
+                                <CSwitch className={'mx-1'} variant={'3d'} color={'success'} defaultChecked={getBadge(item.status)} size="sm" />
                             </td>
                         ),
                     'actionSensor':
@@ -101,6 +102,85 @@ const ListSensor = () => {
                         },
                 }}
             />
+            <hr />
+            <CButton size="sm" color="success" className="ml-1" onClick={() => setAdd(!add)}>
+                Thêm sensor
+            </CButton>
+            {/* Modal thêm sensor mới */}
+            <CModal
+                show={add}
+                onClose={() => setAdd(!add)}
+                color="success"
+                size="lg"
+            >
+                <CModalHeader closeButton>
+                    <CModalTitle>Thêm sensor</CModalTitle>
+                </CModalHeader>
+                <CModalBody>
+                    <CFormGroup row className="mt-3">
+                        <CCol md="3">
+                            <CLabel htmlFor="sensor-code-1">Mã sensor</CLabel>
+                        </CCol>
+                        <CCol xs="12" md="9">
+                            <CInput id="disabled-input" name="sensor-code-1" placeholder="Mã sensor" />
+                        </CCol>
+                    </CFormGroup>
+                    <CFormGroup row className="mt-3">
+                        <CCol md="3">
+                            <CLabel htmlFor="name-sensor-1">Tên sensor</CLabel>
+                        </CCol>
+                        <CCol xs="12" md="9">
+                            <CInput id="disabled-input" name="name-sensor-1" placeholder="Tên sensor" />
+                        </CCol>
+                    </CFormGroup>
+                    <CFormGroup row className="mt-3">
+                        <CCol md="3">
+                            <CLabel htmlFor="select-1">Chọn loại sensor</CLabel>
+                        </CCol>
+                        <CCol xs="12" md="9">
+                            <CSelect custom name="select" id="select-1">
+                                <option value="0">Chọn loại</option>
+                                <option value="1">Option #1</option>
+                                <option value="2">Option #2</option>
+                                <option value="3">Option #3</option>
+                            </CSelect>
+                        </CCol>
+                    </CFormGroup>
+                    <CFormGroup row className="mt-3">
+                        <CCol md="3">
+                            <CLabel htmlFor="comman-on-1">Lệnh bật</CLabel>
+                        </CCol>
+                        <CCol xs="12" md="9">
+                            <CInput id="disabled-input" name="comman-on-1" placeholder="Lệnh bật sensor" />
+                        </CCol>
+                    </CFormGroup>
+                    <CFormGroup row className="mt-3">
+                        <CCol md="3">
+                            <CLabel htmlFor="comman-off-1">Lệnh tắt</CLabel>
+                        </CCol>
+                        <CCol xs="12" md="9">
+                            <CInput id="disabled-input" name="comman-off-1" placeholder="Lệnh tắt sensor" />
+                        </CCol>
+                    </CFormGroup>
+                    <CFormGroup row>
+                        <CCol md="3">
+                            <CLabel htmlFor="textarea-input-1">Mô tả</CLabel>
+                        </CCol>
+                        <CCol xs="12" md="9">
+                            <CTextarea
+                                name="textarea-input-1"
+                                id="textarea-input"
+                                rows="4"
+                                placeholder="Mô tả sensor..."
+                            />
+                        </CCol>
+                    </CFormGroup>
+                </CModalBody>
+                <CModalFooter>
+                    <CButton color="success" onClick={() => setAdd(!add)}>Thêm mới</CButton>{' '}
+                    <CButton color="secondary" onClick={() => setAdd(!add)}>Hủy</CButton>
+                </CModalFooter>
+            </CModal>
             {/* Modal cập nhật sensor */}
             <CModal
                 show={updateS}

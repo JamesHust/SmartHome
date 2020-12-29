@@ -22,17 +22,17 @@ import ListSensor from './ListSensor';
 const DeviceUsed = () => {
     // Dữ liệu fake cho danh sách thiết bị
     const usersData = [
-        { 'Mã thiết bị': '001', 'Tên thiết bị': 'ESP', 'Mô tả': 'Guest', 'status': 'true', 'deviceCode': 'Pi', 'room': 'Phòng khách' },
-        { 'Mã thiết bị': '002', 'Tên thiết bị': 'Pi', 'Mô tả': 'Member', 'status': 'true', 'deviceCode': 'Pi', 'room': 'Phòng khách' },
-        { 'Mã thiết bị': '133', 'Tên thiết bị': 'Đèn phòng', 'Mô tả': 'Staff', 'status': 'false', 'deviceCode': 'Pi', 'room': 'Phòng khách' },
-        { 'Mã thiết bị': '015', 'Tên thiết bị': 'Tivi', 'Mô tả': 'Admin', 'status': 'true', 'deviceCode': 'Pi', 'room': 'Phòng khách' },
-        { 'Mã thiết bị': '110', 'Tên thiết bị': 'Tủ lạnh', 'Mô tả': 'Member', 'status': 'false', 'deviceCode': 'Pi', 'room': 'Phòng khách' },
-        { 'Mã thiết bị': '005', 'Tên thiết bị': 'Điều hòa', 'Mô tả': 'Staff', 'status': 'true', 'deviceCode': 'Pi', 'room': 'Phòng khách' },
-        { 'Mã thiết bị': '007', 'Tên thiết bị': 'Máy sưởi', 'Mô tả': 'Member', 'status': 'false', 'deviceCode': 'Pi', 'room': 'Phòng khách' },
-        { 'Mã thiết bị': '014', 'Tên thiết bị': 'Đèn ngủ', 'Mô tả': 'Staff', 'status': 'false', 'deviceCode': 'Pi', 'room': 'Phòng khách' },
-        { 'Mã thiết bị': '003', 'Tên thiết bị': 'Đèn bếp', 'Mô tả': 'Admin', 'status': 'true', 'deviceCode': 'Pi', 'room': 'Phòng khách' },
-        { 'Mã thiết bị': '112', 'Tên thiết bị': 'Lò vi sóng', 'Mô tả': 'Member', 'status': 'true', 'deviceCode': 'Pi', 'room': 'Phòng khách' },
-        { 'Mã thiết bị': '123', 'Tên thiết bị': 'Bình nóng lạnh', 'Mô tả': 'Staff', 'status': 'true', 'deviceCode': 'Pi', 'room': 'Phòng khách' },
+        { 'Mã thiết bị': '001', 'Tên thiết bị': 'ESP', 'Mô tả': 'Guest', 'deviceCode': 'Pi', 'room': 'Phòng khách' },
+        { 'Mã thiết bị': '002', 'Tên thiết bị': 'Pi', 'Mô tả': 'Member', 'deviceCode': 'Pi', 'room': 'Phòng khách' },
+        { 'Mã thiết bị': '133', 'Tên thiết bị': 'Đèn phòng', 'Mô tả': 'Staff', 'deviceCode': 'Pi', 'room': 'Phòng khách' },
+        { 'Mã thiết bị': '015', 'Tên thiết bị': 'Tivi', 'Mô tả': 'Admin', 'deviceCode': 'Pi', 'room': 'Phòng khách' },
+        { 'Mã thiết bị': '110', 'Tên thiết bị': 'Tủ lạnh', 'Mô tả': 'Member', 'deviceCode': 'Pi', 'room': 'Phòng khách' },
+        { 'Mã thiết bị': '005', 'Tên thiết bị': 'Điều hòa', 'Mô tả': 'Staff', 'deviceCode': 'Pi', 'room': 'Phòng khách' },
+        { 'Mã thiết bị': '007', 'Tên thiết bị': 'Máy sưởi', 'Mô tả': 'Member', 'deviceCode': 'Pi', 'room': 'Phòng khách' },
+        { 'Mã thiết bị': '014', 'Tên thiết bị': 'Đèn ngủ', 'Mô tả': 'Staff', 'deviceCode': 'Pi', 'room': 'Phòng khách' },
+        { 'Mã thiết bị': '003', 'Tên thiết bị': 'Đèn bếp', 'Mô tả': 'Admin', 'deviceCode': 'Pi', 'room': 'Phòng khách' },
+        { 'Mã thiết bị': '112', 'Tên thiết bị': 'Lò vi sóng', 'Mô tả': 'Member', 'deviceCode': 'Pi', 'room': 'Phòng khách' },
+        { 'Mã thiết bị': '123', 'Tên thiết bị': 'Bình nóng lạnh', 'Mô tả': 'Staff', 'deviceCode': 'Pi', 'room': 'Phòng khách' },
     ]
 
 
@@ -56,7 +56,6 @@ const DeviceUsed = () => {
         { key: 'deviceCode', label:'Loại', _style: { width: '10%' } },
         { key: 'room', label:'Phòng sử dụng', _style: { width: '10%' } },
         { key: 'Mô tả', _style: { width: '20%' } },
-        { key: 'status', _style: { width: '10%' } },
         {
             key: 'actionDevice',
             label: '',
@@ -83,8 +82,6 @@ const DeviceUsed = () => {
 
     const [danger, setConfirm] = useState(false)
     const [update, setUpdate] = useState(false)
-    const [add, setAdd] = useState(false)
-    const [deviceAdd, setAddDevice] = useState(false)
     return (
         <div className="card">
             <div className="card-header d-flex justify-content-between align-items-center">
@@ -143,46 +140,12 @@ const DeviceUsed = () => {
                                     <CCollapse show={details.includes(index)}>
                                         <CCardBody>
                                             <ListSensor />
-                                            <hr />
-                                            <CButton size="sm" color="success" className="ml-1" onClick={() => setAdd(!add)}>
-                                                Thêm sensor
-                                            </CButton>
                                         </CCardBody>
                                     </CCollapse>
                                 )
                             }
                     }}
                 />
-                {/* Modal thêm sensor mới */}
-                <CModal
-                    show={add}
-                    onClose={() => setAdd(!add)}
-                    color="success"
-                    size="lg"
-                >
-                    <CModalHeader closeButton>
-                        <CModalTitle>Thêm sensor</CModalTitle>
-                    </CModalHeader>
-                    <CModalBody>
-                        <CFormGroup row className="mt-4">
-                            <CCol md="3">
-                                <CLabel htmlFor="select">Chọn tên sensor thêm mới</CLabel>
-                            </CCol>
-                            <CCol xs="12" md="9">
-                                <CSelect custom name="select" id="select">
-                                    <option value="0">Chọn tên sensor</option>
-                                    <option value="1">Option #1</option>
-                                    <option value="2">Option #2</option>
-                                    <option value="3">Option #3</option>
-                                </CSelect>
-                            </CCol>
-                        </CFormGroup>
-                    </CModalBody>
-                    <CModalFooter>
-                        <CButton color="success" onClick={() => setAdd(!add)}>Thêm mới</CButton>{' '}
-                        <CButton color="secondary" onClick={() => setAdd(!add)}>Hủy</CButton>
-                    </CModalFooter>
-                </CModal>
                 {/* Modal cập nhật thiết bị */}
                 <CModal
                     show={update}

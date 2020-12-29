@@ -21,15 +21,15 @@ import {
     CFormText
 } from '@coreui/react'
 const usersData = [
-    { id: 0, "Tên thiết bị": 'Đèn cổng trước', 'Mô tả': '2018/01/01', 'Loại thiết bị': 'Đèn', status: 'true' },
-    { id: 1, "Tên thiết bị": 'Đèn cổng sau', 'Mô tả': '2018/01/01', 'Loại thiết bị': 'Đèn', status: 'true' },
-    { id: 2, "Tên thiết bị": 'Đèn chùm', 'Mô tả': '2018/02/01', 'Loại thiết bị': 'Đèn', status: 'false' },
-    { id: 3, "Tên thiết bị": 'Đèn bếp', 'Mô tả': '2018/02/01', 'Loại thiết bị': 'Đèn', status: 'false' },
-    { id: 4, "Tên thiết bị": 'Tivi', 'Mô tả': '2018/03/01', 'Loại thiết bị': 'Điện tử', status: 'false' },
-    { id: 5, "Tên thiết bị": 'Điều hòa', 'Mô tả': '2018/01/21', 'Loại thiết bị': 'Điện tử', status: 'false' },
-    { id: 6, "Tên thiết bị": 'Tủ lạnh', 'Mô tả': '2018/01/01', 'Loại thiết bị': 'Điện tử', status: 'true' },
+    { id: 0, "Tên thiết bị": 'Đèn cổng trước', 'Mô tả': '2018/01/01', 'Loại thiết bị': 'Đèn' },
+    { id: 1, "Tên thiết bị": 'Đèn cổng sau', 'Mô tả': '2018/01/01', 'Loại thiết bị': 'Đèn' },
+    { id: 2, "Tên thiết bị": 'Đèn chùm', 'Mô tả': '2018/02/01', 'Loại thiết bị': 'Đèn' },
+    { id: 3, "Tên thiết bị": 'Đèn bếp', 'Mô tả': '2018/02/01', 'Loại thiết bị': 'Đèn' },
+    { id: 4, "Tên thiết bị": 'Tivi', 'Mô tả': '2018/03/01', 'Loại thiết bị': 'Điện tử' },
+    { id: 5, "Tên thiết bị": 'Điều hòa', 'Mô tả': '2018/01/21', 'Loại thiết bị': 'Điện tử' },
+    { id: 6, "Tên thiết bị": 'Tủ lạnh', 'Mô tả': '2018/01/01', 'Loại thiết bị': 'Điện tử' },
 ]
-const fields = ['Tên thiết bị', 'Loại thiết bị', 'Mô tả', 'status',
+const fields = ['Tên thiết bị', 'Loại thiết bị', 'Mô tả',
     {
         key: 'delete',
         label: '',
@@ -39,13 +39,6 @@ const fields = ['Tên thiết bị', 'Loại thiết bị', 'Mô tả', 'status'
     }
 ]
 
-const getBadge = status => {
-    switch (status) {
-        case 'true': return true
-        case 'false': return false
-        default: return false
-    }
-}
 // Từng phòng
 const Room = () => {
     const [large, setConfig] = useState(false)
@@ -108,12 +101,6 @@ const Room = () => {
                                     itemsPerPage={5}
                                     pagination
                                     scopedSlots={{
-                                        'status':
-                                            (item) => (
-                                                <td>
-                                                    <CSwitch className={'mx-1'} variant={'3d'} color={'success'} defaultChecked={getBadge(item.status)} />
-                                                </td>
-                                            ),
                                         'delete':
                                             (item, index) => {
                                                 return (
