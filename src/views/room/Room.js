@@ -15,10 +15,10 @@ import {
     CTabContent,
     CDataTable,
     CFormGroup,
-    CSwitch,
+    CInput,
     CSelect,
     CLabel,
-    CFormText
+    CTextarea
 } from '@coreui/react'
 const usersData = [
     { id: 0, "Tên thiết bị": 'Đèn cổng trước', 'Mô tả': '2018/01/01', 'Loại thiết bị': 'Đèn' },
@@ -79,8 +79,13 @@ const Room = () => {
                     <CModalTitle>Quản lý chi tiết phòng</CModalTitle>
                 </CModalHeader>
                 <CModalBody>
-                    <CTabs activeTab="device">
+                    <CTabs activeTab="info-room">
                         <CNav variant="tabs">
+                        <CNavItem>
+                                <CNavLink data-tab="info-room">
+                                    Thông tin phòng
+                            </CNavLink>
+                            </CNavItem>
                             <CNavItem>
                                 <CNavLink data-tab="device">
                                     Danh sách thiết bị phòng
@@ -93,6 +98,32 @@ const Room = () => {
                             </CNavItem>
                         </CNav>
                         <CTabContent>
+                            {/* Tab thông tin phòng */}
+                            <CTabPane data-tab="info-room">
+                                <CFormGroup row className="mt-3">
+                                    <CCol md="2">
+                                        <CLabel htmlFor="name-room">Tên phòng</CLabel>
+                                    </CCol>
+                                    <CCol xs="12" md="10">
+                                        <CInput id="disabled-input" name="name-room" placeholder="Tên phòng" />
+                                    </CCol>
+                                </CFormGroup>
+                                <CFormGroup row>
+                                    <CCol md="2">
+                                        <CLabel htmlFor="textarea-input">Mô tả</CLabel>
+                                    </CCol>
+                                    <CCol xs="12" md="10">
+                                        <CTextarea
+                                            name="textarea-input"
+                                            id="textarea-input"
+                                            rows="9"
+                                            placeholder="Mô tả phòng..."
+                                        />
+                                    </CCol>
+                                </CFormGroup>
+                                {/* Cập nhật */}
+                                <div className="d-flex justify-content-end w-100"><CButton color="info">Cập nhật</CButton></div>
+                            </CTabPane>
                             {/* Tab quản lý thiết bị phòng */}
                             <CTabPane data-tab="device">
                                 <CDataTable
@@ -115,8 +146,6 @@ const Room = () => {
                                             },
                                     }}
                                 />
-                                {/* Cập nhật */}
-                                <CButton color="info" style={{ position: 'absolute', bottom: '32px', right: "16px" }}>Cập nhật</CButton>
                             </CTabPane>
                             {/* Tab thêm mới thiết bị */}
                             <CTabPane data-tab="add-device">
